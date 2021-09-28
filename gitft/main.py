@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+from copy import deepcopy
 from functools import reduce
 import argparse
-import copy
 import os
 import re
 import subprocess
 
 
-def ext_of(filename: str) -> str:
+def ext_of(filename):
     return os.path.splitext(filename)[1]
 
 
@@ -23,7 +23,7 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def git_grep(tree: str):
+def git_grep(tree):
     return subprocess.check_output(
         ["git", "grep", "-Ic", "", tree], encoding="utf-8"
     ).splitlines()
@@ -32,7 +32,7 @@ def git_grep(tree: str):
 SPLIT_PATTERN = re.compile(r"^(?:[^:]+):(.+):([^:]+)$")
 
 
-def stat_from(line):
+def stat_of(line):
     match = re.match(SPLIT_PATTERN, line)
     if match == None:
         raise RuntimeError("未知の文字列です。")
@@ -40,8 +40,8 @@ def stat_from(line):
     return {ext_of(filepath): {"file": 1, "line": int(line)}}
 
 
-def merge_stat(stat1, stat2):
-    result = copy.deepcopy(stat1)
+def merge_stats(stat1, stat2):
+    result = deepcopy(stat1)
     for key in list(stat2):
         if key in result:
             result[key]["file"] += stat2[key]["file"]
@@ -52,7 +52,7 @@ def merge_stat(stat1, stat2):
 
 
 def count_lines(tree):
-    return reduce(merge_stat, map(stat_from, git_grep(tree)))
+    return reduce(merge_stats, map(stat_of, git_grep(tree)))
 
 
 def print_stat(stat):
