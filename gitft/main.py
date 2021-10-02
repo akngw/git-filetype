@@ -8,7 +8,7 @@ import re
 import subprocess
 
 
-def prepare_argument_parser():
+def argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("tree", nargs="?", default="HEAD")
     parser.add_argument(
@@ -36,8 +36,7 @@ def prepare_argument_parser():
 
 
 def parse_arguments():
-    parser = prepare_argument_parser()
-    return parser.parse_args()
+    return argument_parser().parse_args()
 
 
 def git_grep(env):
@@ -101,4 +100,5 @@ def main():
     ft(parse_arguments())
 
 
-main()
+if __name__ == "__main__":
+    main()
