@@ -1,6 +1,6 @@
-# git-ft
+# git-filettype
 
-git-ftというGitのサブコマンドです。拡張子ごとの行数・ファイル数が取得できます。
+git-filettypeというGitのサブコマンドです。拡張子ごとの行数・ファイル数が取得できます。
 
 ## インストール
 
@@ -11,7 +11,7 @@ pip install git+https://github.com/akngw/gitft
 ## 使い方
 
 ```
-usage: git-ft [-h] [-c] [-I] [-i] [tree]
+usage: git-filettype [-h] [-c] [-I] [-i] [tree]
 
 positional arguments:
   tree
@@ -23,10 +23,12 @@ optional arguments:
   -i, --ignore-case  ignore case the extensions
 ```
 
+git-ftという短い名前でも使えます。
+
 ## 使用例
 
 ```
-$ git ft -c
+$ git filetype -c
 :2:150
 .cfg:1:11
 .md:1:1
