@@ -5,7 +5,7 @@ git-filettypeというGitのサブコマンドです。拡張子ごとの行数�
 ## インストール
 
 ```
-pip install git+https://github.com/akngw/gitft
+pip install git+https://github.com/akngw/git-filetype
 ```
 
 ## 使い方
