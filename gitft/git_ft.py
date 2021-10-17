@@ -57,7 +57,7 @@ def ext_of(env, filename):
 def stat_of(env, line):
     _ext_of = partial(ext_of, env)
     match = re.match(SPLIT_PATTERN, line)
-    if match == None:
+    if match is None:
         raise RuntimeError("未知の文字列です。")
     filepath, line = match.group(1, 2)
     return {_ext_of(filepath): {"file": 1, "line": int(line)}}
